@@ -62,6 +62,8 @@ iter = mapStudent.find(1);
 if (iter != mapStudent.end()) {
     cout << "Found, value = " << iter->second << endl;
 }
+
+mapStudent.count(1) // 返回 0/1
 ```
 * 删除
 ```c++
@@ -70,3 +72,21 @@ mapStudent.erase(iter);
 int flag = maStudent.erase(1); // 删除返回1，否则0
 mapStudent.erase(mapStudent.begin(), mapStudent.end()); // 前闭后开
 ```
+
+## Unordered_map
+内部维护一个 hash 表，查找速度比较快，但是 hash 表建立比较耗时
+
+## Set
+内部实现红黑树，不会插入相同键值元素
+```c++
+#include <set>
+
+set<int> s;
+s.insert(5);
+set<int>::iterator iter = s.begin()
+s.clear()
+iter = s.find(5)
+iter = s.count(5)
+```
+## Unordered_set
+内部为 hash 表的集合
