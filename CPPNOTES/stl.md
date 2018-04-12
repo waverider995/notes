@@ -90,3 +90,99 @@ iter = s.count(5)
 ```
 ## Unordered_set
 内部为 hash 表的集合
+
+
+## Algorithm
+
+* for_each
+
+for_each 其实是一个模板函数，将 for 循环封装，前两个参数是迭代器，第三个参数是一个函数指针(或者仿函数)，实现对每一个迭代器所指向的值调用仿函数
+
+实质：
+```c++
+template<typename InputIterator, typename Function>
+Function for_each(InputIterator beg, InputIterator end, Function f) {
+    while (beg != end){
+        f(*beg++);
+    }
+}
+```
+
+Procedure Based:
+不传入参数
+```c++
+void fun(int i)
+{
+    cout << i << endl;
+}
+
+int main()
+{
+    std::vector<int> vec;
+    for_each(vec.begin(), vec.end(), fun);
+}
+```
+
+传入参数
+```c++
+void fun(int i, const string str)
+{
+    cout << str << i << endl;
+}
+
+int main()
+{
+    std::vector<int> vec;
+    for_each(vec.begin(), vec.end(), bind2nd(ptr_fun(fun), "Vector Element: "));
+    // ptr_fun 将普通函数适配成一个仿函数(functor)
+}
+```
+
+Object Oriented:
+
+使用 function object
+
+不传入参数
+
+```c++
+struct Print
+{
+    void operator () (int i)
+    {
+        cout << i << endl;
+    }
+};
+
+int main()
+{
+    vector<int> vec;
+    for_each(vec.begin(), vec.end(), Print());
+}
+```
+传入参数
+```c++
+struct Print
+{
+    const string str;
+    Print(const string s):str(s) {}
+    void operator () (int i)
+    {
+        cout << str << i << endl;
+    }
+
+};
+
+int main()
+{
+    vector<int> vec;
+    for_each(vec.begin(), vec.end(), Print("Vector Element: ");
+}
+```
+
+Member function 
+
+```c++
+std::for_each(vect.begin(), vect.end(), std::mem_fun(&Class::func))；
+std::for_each(vect.begin(), vect.end(), std::mem_fun_ref(&Class::fun);
+// 当容器中存放的是对象实体时用 mem_fun_ref，当存放对象指针时用 mem_fun
+```
