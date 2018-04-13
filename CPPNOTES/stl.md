@@ -138,7 +138,7 @@ int main()
 }
 ```
 
-Object Oriented:
+Object Oriented:
 
 使用 function object
 
@@ -185,4 +185,45 @@ Member function
 std::for_each(vect.begin(), vect.end(), std::mem_fun(&Class::func))；
 std::for_each(vect.begin(), vect.end(), std::mem_fun_ref(&Class::fun);
 // 当容器中存放的是对象实体时用 mem_fun_ref，当存放对象指针时用 mem_fun
+```
+
+* sort
+```c++
+vector<int> vec;
+sort(vec.begin(), vec.end()); // 默认升序
+sort(vec.begin(), vec.end(), less<int>());
+sort(vec.begin(), vec.end(), greater<int>());
+```
+
+```c++
+class A
+{
+public:
+    A(int k): key_(k) {}
+    int getKey() const { return key_; }
+    bool operator < (const A &other) const
+    {
+        return (this->key_ < other.getKey());
+    }
+private:
+    int key_;
+}
+
+vector<A> vec;
+sort(vec.begin(), vec.end(), less<A>());
+
+bool cmp(const A &first, const A &second)
+{
+    return (first.getKey() < second.getKey());
+}
+
+sort(vec.begin(), vec.end(), cmp);
+
+```
+
+
+* find
+
+```c++
+vector<int>::iterator iter = find(vec.begin(), vec.end(), key);
 ```
