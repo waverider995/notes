@@ -1,4 +1,6 @@
-## Vector
+## 模板类与容器
+
+### Vector
 
 * 构造
 ```c++
@@ -36,7 +38,7 @@ copy(a.begin(), a.end(), b.begin()+1) // 把a复制到b，包括b+1的位置，�
 find(a.begin(), a.end(), key) //返回位置
 ```
 
-## Map
+### Map
 std map 内部自建一棵红黑树，对数据自动排序。
 * 构造
 ```c++
@@ -73,10 +75,10 @@ int flag = maStudent.erase(1); // 删除返回1，否则0
 mapStudent.erase(mapStudent.begin(), mapStudent.end()); // 前闭后开
 ```
 
-## Unordered_map
+### Unordered_map
 内部维护一个 hash 表，查找速度比较快，但是 hash 表建立比较耗时
 
-## Set
+### Set
 内部实现红黑树，不会插入相同键值元素
 ```c++
 #include <set>
@@ -88,13 +90,29 @@ s.clear()
 iter = s.find(5)
 iter = s.count(5)
 ```
-## Unordered_set
+### Unordered_set
 内部为 hash 表的集合
 
+### Stack
+```c++
+stack<int> s;
+s.push(5);
+s.top();
+s.pop();
+```
+
+### Queue
+```c++
+queue<int> q;
+q.push(5);
+q.pop(); // void
+q.front();
+q.back();
+```
 
 ## Algorithm
 
-* for_each
+### for_each
 
 for_each 其实是一个模板函数，将 for 循环封装，前两个参数是迭代器，第三个参数是一个函数指针(或者仿函数)，实现对每一个迭代器所指向的值调用仿函数
 
@@ -187,7 +205,7 @@ std::for_each(vect.begin(), vect.end(), std::mem_fun_ref(&Class::fun);
 // 当容器中存放的是对象实体时用 mem_fun_ref，当存放对象指针时用 mem_fun
 ```
 
-* sort
+### sort
 ```c++
 vector<int> vec;
 sort(vec.begin(), vec.end()); // 默认升序
@@ -222,7 +240,7 @@ sort(vec.begin(), vec.end(), cmp);
 ```
 
 
-* find
+### find
 
 ```c++
 vector<int>::iterator iter = find(vec.begin(), vec.end(), key);
