@@ -2,6 +2,8 @@
 
 ### Vector
 
+一段连续内存
+
 * 构造
 ```c++
 using std::vector
